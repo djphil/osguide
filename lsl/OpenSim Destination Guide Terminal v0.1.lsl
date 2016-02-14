@@ -1,6 +1,6 @@
 // OpenSim Destination Guide Terminal v0.1 by djphil (CC-BY-NC-SA 4.0)
 
-string  targetUrl      = "http://domaine.com/osguide/inc/";
+string  targetUrl      = "http://domaine.com/osguide/";
 string  terminal_name  = "OpenSim Destination Guide Terminal";
 string  categorie_name = "Official location";
 float   update_rate    = 300.0;
@@ -42,7 +42,7 @@ addRegionToDestinationGuide(string url)
     list agents_list = llGetAgentList(AGENT_LIST_PARCEL_OWNER, []);
     integer agents_online = llGetListLength(agents_list);
 
-    addRegionToDestinationGuideID = llHTTPRequest(targetUrl + "terminal.php",
+    addRegionToDestinationGuideID = llHTTPRequest(targetUrl + "inc/terminal.php",
         [HTTP_METHOD, "POST", HTTP_MIMETYPE, "application/x-www-form-urlencoded", HTTP_BODY_MAXLENGTH, 16384],
         "terminal=register" + 
         "&categorie_name=" + llEscapeURL(categorie_name) +
@@ -72,7 +72,7 @@ getObjectDetails()
     text += "\nPosition: "      + llList2String(buffer, 2);
     text += "\nRotation: "      + llList2String(buffer, 3);
     text += "\nVitesse: "       + llList2String(buffer, 4);
-    text += "\nPropriétaire: "  + llList2String(buffer, 5);
+    text += "\nPropriÃ©taire: "  + llList2String(buffer, 5);
     text += "\nGroupe: "        + llList2String(buffer, 6);
     text += "\nCreateur: "      + llList2String(buffer, 7);
     llOwnerSay(text);
@@ -100,21 +100,21 @@ verify_region_parcel_owner()
 
     else
     {
-        llOwnerSay("\nDésolé " + osKey2Name(object_owner_uuid) + " la parcelle " + parcel_name + " ne t'appartient pas ...");
+        llOwnerSay("\nDÃ©solÃ© " + osKey2Name(object_owner_uuid) + " la parcelle " + parcel_name + " ne t'appartient pas ...");
 
         llInstantMessage(parcel_owner_uuid, 
             "Bonjour " + osKey2Name(parcel_owner_uuid) + 
-            "\nUn object nomé \"" + llGetObjectName() + "\"" + 
-            " à été rezzer par " + llKey2Name(object_owner_uuid) + 
+            "\nUn object nomÃ© \"" + llGetObjectName() + "\"" + 
+            " Ã  Ã©tÃ© rezzer par " + llKey2Name(object_owner_uuid) + 
             " sur la parcelle " + parcel_name + 
-            " de la région " + llGetRegionName() +
+            " de la rÃ©gion " + llGetRegionName() +
             " sur la grille " + osGetGridName() +
             "\n[OBJET UUID] " + llGetKey() +
             "\n[OWNER UUID] " + object_owner_uuid
         );
 
         llDie();
-    }   
+    }
 }
 
 default 
@@ -130,7 +130,7 @@ default
 
         llSetObjectName(llGetScriptName());
         llSetObjectDesc("Digital Concepts (CC-BY-NC-SA 4.0)");
-        llSetText("[? TERMINAL ?]\n" + region_name + "\n(" + owner_name + ")", <1.0, 1.0, 1.0>, 1.0);
+        llSetText("[âœª TERMINAL âœª]\n" + region_name + "\n(" + owner_name + ")", <1.0, 1.0, 1.0>, 1.0);
         llSetTexture(osGetMapTexture(),ALL_SIDES); // TL None
         llSetTimerEvent(0.1);
     }
