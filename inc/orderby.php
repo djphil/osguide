@@ -1,6 +1,6 @@
 <?php
 if (isset($_GET['categorie']))
-    $categorie = htmlspecialchars($_GET["categorie"]);
+    $categorie = htmlspecialchars($_GET['categorie']);
 else $categorie = "All Categories";
 ?>
 

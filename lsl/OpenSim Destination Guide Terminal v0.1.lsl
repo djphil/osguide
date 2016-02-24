@@ -52,32 +52,6 @@ addRegionToDestinationGuide(string url)
     );
 }
 
-getObjectDetails()
-{
-    list buffer = llGetObjectDetails(llDetectedKey(0), ([
-        OBJECT_NAME,
-        OBJECT_DESC, 
-        OBJECT_POS, 
-        OBJECT_ROT, 
-        OBJECT_VELOCITY,
-        OBJECT_OWNER, 
-        OBJECT_GROUP, 
-        OBJECT_CREATOR
-    ]));
-    
-    string text;
-    text += "UUID: "            + (string)llDetectedKey(0);
-    text += "\nNom: \""         + llList2String(buffer, 0) + "\"";
-    text += "\nDescription: \"" + llList2String(buffer, 1) + "\"";
-    text += "\nPosition: "      + llList2String(buffer, 2);
-    text += "\nRotation: "      + llList2String(buffer, 3);
-    text += "\nVitesse: "       + llList2String(buffer, 4);
-    text += "\nPropriétaire: "  + llList2String(buffer, 5);
-    text += "\nGroupe: "        + llList2String(buffer, 6);
-    text += "\nCreateur: "      + llList2String(buffer, 7);
-    llOwnerSay(text);
-}
-
 string http_server_url;
 request_http_server_url()
 {

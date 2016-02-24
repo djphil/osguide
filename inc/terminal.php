@@ -118,11 +118,11 @@ if (isset($_POST['terminal']))
             SELECT * 
             FROM $tbname 
             WHERE (
-                region_name = '".$region_name."' 
+                region_name = '".mysql_real_escape_string($region_name)."' 
                 AND 
-                object_uuid = '".$object_uuid."' 
+                object_uuid = '".mysql_real_escape_string($object_uuid)."' 
                 AND 
-                owner_uuid = '".$owner_uuid."'
+                owner_uuid = '".mysql_real_escape_string($owner_uuid)."'
             )
         ");
 
@@ -157,15 +157,15 @@ if (isset($_POST['terminal']))
                     date
                 )
                 VALUES (
-                    '".$region_name."', 
-                    '".$owner_name."', 
-                    '".$owner_uuid."',
-                    '".$object_name."', 
-                    '".$object_uuid."', 
-                    '".$categorie_name."',
-                    '".$local_position."',
-                    '".$http_server_url."',
-                    '".$agents_online."',
+                    '".mysql_real_escape_string($region_name)."', 
+                    '".mysql_real_escape_string($owner_name)."', 
+                    '".mysql_real_escape_string($owner_uuid)."',
+                    '".mysql_real_escape_string($object_name)."', 
+                    '".mysql_real_escape_string($object_uuid)."', 
+                    '".mysql_real_escape_string($categorie_name)."',
+                    '".mysql_real_escape_string($local_position)."',
+                    '".mysql_real_escape_string($http_server_url)."',
+                    '".mysql_real_escape_string($agents_online)."',
                     '".$timestamp."'
                 )
             ");
@@ -184,17 +184,17 @@ if (isset($_POST['terminal']))
             // UPDATE
             $query = $db->prepare("
                 UPDATE $tbname
-                SET local_position = '".$local_position."', 
-                    http_server_url = '".$http_server_url."', 
-                    categorie_name = '".$categorie_name."', 
-                    agents_online = '".$agents_online."', 
+                SET local_position = '".mysql_real_escape_string($local_position)."', 
+                    http_server_url = '".mysql_real_escape_string($http_server_url)."', 
+                    categorie_name = '".mysql_real_escape_string($categorie_name)."', 
+                    agents_online = '".mysql_real_escape_string($agents_online)."', 
                     date = '".$timestamp."'
                 WHERE (
-                    region_name = '".$region_name."' 
+                    region_name = '".mysql_real_escape_string($region_name)."' 
                     AND 
-                    object_uuid = '".$object_uuid."' 
+                    object_uuid = '".mysql_real_escape_string($object_uuid)."' 
                     AND 
-                    owner_uuid = '".$owner_uuid."'
+                    owner_uuid = '".mysql_real_escape_string($owner_uuid)."'
                 )
             ");
             $query->execute();
@@ -204,11 +204,11 @@ if (isset($_POST['terminal']))
                 SELECT * 
                 FROM $tbname 
                 WHERE (
-                    region_name = '".$region_name."' 
+                    region_name = '".mysql_real_escape_string($region_name)."' 
                     AND 
-                    object_uuid = '".$object_uuid."' 
+                    object_uuid = '".mysql_real_escape_string($object_uuid)."' 
                     AND 
-                    owner_uuid = '".$owner_uuid."'
+                    owner_uuid = '".mysql_real_escape_string($owner_uuid)."'
                 )
             ");
             $query->execute();

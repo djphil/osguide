@@ -52,9 +52,9 @@
 <?php
 if (isset($_POST['search']))
 {
-    if (!empty($_POST["searchword"]))
+    if (!empty($_POST['searchword']))
     {
-        $search_word  = htmlspecialchars($_POST["searchword"]);
+        $search_word  = htmlspecialchars($_POST['searchword']);
         $query = ('
             SELECT * 
             FROM '.$tbname.' 
@@ -138,4 +138,3 @@ unset($categorie_name);
 $query = null;
 ?>
 </section>
-
