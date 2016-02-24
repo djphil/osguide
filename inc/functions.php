@@ -1,7 +1,7 @@
 <?php
 function debug($variable)
 {
-	echo '<pre>' . print_r($variable, true) . '</pre>';
+    echo '<pre>' . print_r($variable, true) . '</pre>';
 }
 
 function generate_uuid()
@@ -41,7 +41,7 @@ function getImageByName($dir, $name, $offset)
 // 1 Official location
 // 3 Arts and culture
 // 4 Business
-// 5 Educationnal
+// 5 Educational
 // 6 Gaming
 // 7 Hangout
 // 8 Newcomer friendly
@@ -58,7 +58,7 @@ function getDefaultDestinationCategories()
         1 => "Official location",
         3 => "Arts and culture",
         4 => "Business",
-        5 => "Educationnal",
+        5 => "Educational",
         6 => "Gaming",
         7 => "Hangout",
         8 => "Newcomer friendly",

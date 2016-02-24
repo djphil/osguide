@@ -66,7 +66,7 @@ Coming soon ...
         <li>Copy the OpenSim Destination Guide Terminal script into a prim, configure and compile it.<br />
             (configurable variables: targetUrl, terminal_name, categorie_name, update_rate).
         </li>
-        <li>Clic on the prim to update your region/parcel informations in the Opensim Destination Guide.</li>
+        <li>Click on the prim to update your region/parcel informations in the Opensim Destination Guide.</li>
     </ol>
     <a class="btn btn-default btn-success btn-xs" href="lsl/OpenSim Destination Guide Terminal v0.1.lsl" target="_blank">
     <i class="glyphicon glyphicon-save"></i> Download</a> OpenSim Destination Guide Terminal
@@ -81,7 +81,7 @@ Coming soon ...
     </ol>
     <h3>Outworld:</h3>
     <ol>
-        <li>Clic on the "update" button on your region/parcel details page on the OpenSim Destination Guide.</li>
+        <li>Click on the "update" button on your region/parcel details page on the OpenSim Destination Guide.</li>
     </ol>
 </article>
 
