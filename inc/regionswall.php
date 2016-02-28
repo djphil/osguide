@@ -97,7 +97,7 @@ try {
         $region_aera = 65536;
         $last_update = $row->date;
 
-        echo '<div class="col-md-4">';
+        echo '<div class="col-xs-12 col-sm-6 col-md-4">';
         echo '<div class="text-left rounded border boxer">';
         echo '<a href="?details='.$region_name.'" target="_self" style="text-decoration: none;">';
         echo '<img class="img-thumbnail" src="'.getImageByName("img/", $region_name, 1).'" alt="'.$region_name.'" >';

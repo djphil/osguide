@@ -36,7 +36,7 @@ foreach ($categories as $categorie)
         }
         else $counter = $sql->rowCount();
 
-        echo '<div class="col-md-4">';
+        echo '<div class="col-xs-12 col-sm-6 col-md-4">';
         echo '<div class="text-left rounded border boxer">';
         echo '<a href="./?categorie='.$categorie.'" style="text-decoration: none;">';
         echo '<img class="img-thumbnail" src="'.getImageByName("img/", $categorie, 1).'" alt="'.$categorie.'" >';
