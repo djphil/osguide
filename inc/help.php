@@ -29,6 +29,7 @@ Coming soon ...
 
 <article>
     <h2>Install</h2>
+    <?php echo $osguide; ?> have a "special" page for viewers (inc/destinations.php)<br />
     <h3>Robust.ini</h3>
     <pre>
     [LoginService]
