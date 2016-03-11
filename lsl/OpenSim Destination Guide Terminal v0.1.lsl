@@ -63,7 +63,7 @@ request_http_server_url()
 verify_region_parcel_owner()
 {
     list parcel_details   = llGetParcelDetails(llGetPos(), [PARCEL_DETAILS_NAME, PARCEL_DETAILS_OWNER]);
-    string parcel_name    =  llList2String(parcel_details, 0);
+    string parcel_name    = llList2String(parcel_details, 0);
     key parcel_owner_uuid = llList2String(parcel_details, 1);
     key object_owner_uuid = llGetOwner();
 
