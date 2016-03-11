@@ -1,7 +1,7 @@
+<h1><?php echo $osguide; ?> <span class="pull-right">Help</span></h1>
 <section>
 <article>
-<h1><?php echo $osguide; ?> <span class="pull-right">Help</span></h1>
-Coming soon ...
+    Coming soon ...
 </article>
 
 <article>
@@ -69,8 +69,8 @@ Coming soon ...
         </li>
         <li>Click on the prim to update your region/parcel informations in the Opensim Destination Guide.</li>
     </ol>
-    <a class="btn btn-default btn-success btn-xs" href="lsl/OpenSim Destination Guide Terminal v0.1.lsl" target="_blank">
-    <i class="glyphicon glyphicon-save"></i> Download</a> OpenSim Destination Guide Terminal
+    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#terminal">
+    <i class="glyphicon glyphicon-save"></i> Download</button> OpenSim Destination Guide Terminal
 </article>
 
 <article id="RemoveRegion">
@@ -101,4 +101,23 @@ Coming soon ...
     <?php include_once("inc/paypal.php"); ?>
 </article>
 
+<div class="modal fade" id="terminal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">OpenSim Destination Guide Terminal v0.1.lsl</h4>
+            </div>
+            <div class="modal-body">
+                <?php
+                $file = file_get_contents('lsl/OpenSim Destination Guide Terminal v0.1.lsl', true);
+                echo '<pre>'.$file.'</pre>';
+                ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 </section>
