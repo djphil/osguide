@@ -126,6 +126,10 @@ if (isset($_POST['terminal']))
             )
         ");
 
+        $query->bindValue(1, $region_name, PDO::PARAM_STR);
+        $query->bindValue(2, $object_uuid, PDO::PARAM_STR);
+        $query->bindValue(3, $owner_uuid, PDO::PARAM_STR);
+
         $query->execute();
 
         /* SQLite */
@@ -157,18 +161,30 @@ if (isset($_POST['terminal']))
                     date
                 )
                 VALUES (
-                    '".$region_name."', 
-                    '".$owner_name."', 
-                    '".$owner_uuid."',
-                    '".$object_name."', 
-                    '".$object_uuid."', 
-                    '".$categorie_name."',
-                    '".$local_position."',
-                    '".$http_server_url."',
-                    '".$agents_online."',
-                    '".$timestamp."'
+                    :region_name, 
+                    :owner_name, 
+                    :owner_uuid,
+                    :object_name, 
+                    :object_uuid, 
+                    :categorie_name,
+                    :local_position,
+                    :http_server_url,
+                    :agents_online,
+                    :date
                 )
             ");
+
+            $query->bindValue(':region_name', $region_name, PDO::PARAM_STR);
+            $query->bindValue(':owner_name', $owner_name, PDO::PARAM_STR);
+            $query->bindValue(':owner_uuid', $owner_uuid, PDO::PARAM_STR);
+            $query->bindValue(':object_name', $object_name, PDO::PARAM_STR);
+            $query->bindValue(':object_uuid', $object_uuid, PDO::PARAM_STR);
+            $query->bindValue(':categorie_name', $categorie_name, PDO::PARAM_STR);
+            $query->bindValue(':local_position', $local_position, PDO::PARAM_STR);
+            $query->bindValue(':http_server_url', $http_server_url, PDO::PARAM_STR);
+            $query->bindValue(':agents_online', $agents_online, PDO::PARAM_INT);
+            $query->bindValue(':date', $timestamp, PDO::PARAM_STR);
+
             $query->execute();
         }
 
@@ -184,19 +200,29 @@ if (isset($_POST['terminal']))
             // UPDATE
             $query = $db->prepare("
                 UPDATE $tbname
-                SET local_position = '".$local_position."', 
-                    http_server_url = '".$http_server_url."', 
-                    categorie_name = '".$categorie_name."', 
-                    agents_online = '".$agents_online."', 
-                    date = '".$timestamp."'
+                SET local_position = :local_position, 
+                    http_server_url = :http_server_url, 
+                    categorie_name = :categorie_name, 
+                    agents_online = :agents_online, 
+                    date = :timestamp
                 WHERE (
-                    region_name = '".$region_name."' 
+                    region_name = :region_name 
                     AND 
-                    object_uuid = '".$object_uuid."' 
+                    object_uuid = :object_uuid 
                     AND 
-                    owner_uuid = '".$owner_uuid."'
+                    owner_uuid = :owner_uuid
                 )
             ");
+
+            $query->bindValue(':local_position', $local_position, PDO::PARAM_STR);
+            $query->bindValue(':http_server_url', $http_server_url, PDO::PARAM_STR);
+            $query->bindValue(':categorie_name', $categorie_name, PDO::PARAM_STR);
+            $query->bindValue(':agents_online', $agents_online, PDO::PARAM_STR);
+            $query->bindValue(':timestamp', $timestamp, PDO::PARAM_STR);
+            $query->bindValue(':region_name', $region_name, PDO::PARAM_STR);
+            $query->bindValue(':object_uuid', $object_uuid, PDO::PARAM_STR);
+            $query->bindValue(':owner_uuid', $owner_uuid, PDO::PARAM_STR);
+
             $query->execute();
 
             // READ
@@ -204,16 +230,21 @@ if (isset($_POST['terminal']))
                 SELECT * 
                 FROM $tbname 
                 WHERE (
-                    region_name = '".$region_name."' 
+                    region_name = ?
                     AND 
-                    object_uuid = '".$object_uuid."' 
+                    object_uuid = ?
                     AND 
-                    owner_uuid = '".$owner_uuid."'
+                    owner_uuid = ?
                 )
             ");
-            $query->execute();
-            $row = $query->fetch(PDO::FETCH_NUM);
 
+            $query->bindValue(1, $region_name, PDO::PARAM_STR);
+            $query->bindValue(2, $object_uuid, PDO::PARAM_STR);
+            $query->bindValue(3, $owner_uuid, PDO::PARAM_STR);
+
+            $query->execute();
+
+            $row = $query->fetch(PDO::FETCH_NUM);
             echo "\n[TERMINAL UPDATE] ".$row[10];
         }
 

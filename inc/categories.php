@@ -22,6 +22,8 @@ foreach ($categories as $categorie)
         WHERE categorie_name = ?
     ");
 
+    $sql->bindValue(1, $categorie, PDO::PARAM_STR);
+
     try {
         if ($categorie === "All Categories")
             $sql->execute();
