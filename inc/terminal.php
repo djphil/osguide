@@ -14,7 +14,7 @@ else include_once("PDO-mysql.php");
 
 if (isset($_POST['terminal']))
 {
-	$action = htmlspecialchars($_POST["terminal"]);
+    $action = htmlspecialchars($_POST["terminal"]);
 
     if ($action === "register")
     {
@@ -196,7 +196,7 @@ if (isset($_POST['terminal']))
             echo "\n[TERMINAL INFO] ".$counter." terminal ✔";
             echo "\n[TERMINAL NAME] ".$row[4];
             echo "\n[TERMINAL DATE] ".$row[10];
-            
+
             // UPDATE
             $query = $db->prepare("
                 UPDATE $tbname
