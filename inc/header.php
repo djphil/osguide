@@ -40,8 +40,14 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    
+
     <body>
-    
+
     <div class="container">
-    <!-- <div class="starter-template"> -->
+        <div class="github-fork-ribbon-wrapper left">
+            <div class="github-fork-ribbon">
+                <a href="https://github.com/djphil/osguide" target="_blank">Fork me on GitHub</a>
+            </div>
+        </div>
+        <div class="row">
+        <!-- <div class="starter-template"> -->
