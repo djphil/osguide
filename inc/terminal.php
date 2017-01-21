@@ -87,7 +87,7 @@ if (isset($_POST['terminal']))
         $hopURL = "hop://".$region_name."/".$local_position;
         $appURL = "secondlife:///app/teleport/".$region_name."/".$local_position;
 
-        $timestamp = date("Y-m-d, H-i-s");
+        $timestamp  = time();
 
         if ($debug)
         {
@@ -183,7 +183,7 @@ if (isset($_POST['terminal']))
             $query->bindValue(':local_position', $local_position, PDO::PARAM_STR);
             $query->bindValue(':http_server_url', $http_server_url, PDO::PARAM_STR);
             $query->bindValue(':agents_online', $agents_online, PDO::PARAM_INT);
-            $query->bindValue(':date', $timestamp, PDO::PARAM_STR);
+            $query->bindValue(':date', $timestamp, PDO::PARAM_INT);
 
             $query->execute();
         }
@@ -218,7 +218,7 @@ if (isset($_POST['terminal']))
             $query->bindValue(':http_server_url', $http_server_url, PDO::PARAM_STR);
             $query->bindValue(':categorie_name', $categorie_name, PDO::PARAM_STR);
             $query->bindValue(':agents_online', $agents_online, PDO::PARAM_STR);
-            $query->bindValue(':timestamp', $timestamp, PDO::PARAM_STR);
+            $query->bindValue(':timestamp', $timestamp, PDO::PARAM_INT);
             $query->bindValue(':region_name', $region_name, PDO::PARAM_STR);
             $query->bindValue(':object_uuid', $object_uuid, PDO::PARAM_STR);
             $query->bindValue(':owner_uuid', $owner_uuid, PDO::PARAM_STR);
