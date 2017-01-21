@@ -3,18 +3,6 @@
 <?php include_once("inc/header.php"); ?>
 <?php include_once("inc/navbar.php"); ?>
 
-<?php
-ini_set('magic_quotes_gpc', 0);
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-?>
-
-<div class="github-fork-ribbon-wrapper left">
-    <div class="github-fork-ribbon">
-        <a href="https://github.com/djphil/osguide" target="_blank">Fork me on GitHub</a>
-    </div>
-</div>
-    
 <!-- Fash Message -->
 <?php if(isset($_SESSION['flash'])): ?>
     <?php foreach($_SESSION['flash'] as $type => $message): ?>
@@ -42,7 +30,7 @@ if ($useSQLite === TRUE)
             local_position  VARCHAR(16),
             http_server_url VARCHAR(128),
             agents_online   VARCHAR(4),
-            date            CURRENT_TIMESTAMP	
+            date            INT(11)
         );
     ");
 }
