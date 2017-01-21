@@ -8,6 +8,7 @@ if (isset($_GET['details']))
         FROM ".$tbname." 
         WHERE region_name = ?
     ");
+    $sql->bindValue(1, $region_name, PDO::PARAM_STR);
 
     try {
         $sql->execute(array($region_name));
@@ -27,7 +28,9 @@ if (isset($_GET['details']))
 
         if ($counter == 0)
         {
-            echo '<p class="alert alert-warning">0 destination found ...</p>';
+            echo '<p class="alert alert-warning">';
+            echo '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>';
+            echo '<strong>0</strong> destination found ...</p>';
         }
 
         echo '<center>';
@@ -59,12 +62,13 @@ if (isset($_GET['details']))
             // $aera = $sizeX * $sizeY;
             $local_position = $row->local_position;
             $region_aera = 65536;
-            $last_update = $row->date;
+            $last_update  = date("d/m/Y h:m:s", $row->date);
 
+            echo '<div class="col-md-12">';
             echo '<div class="col-md-6">';
             echo '<div class="text-left rounded border boxer">';
             echo '<a href="secondlife://'.$region_name.'/'.$local_position.'" target="_self" style="text-decoration: none;">';
-            echo '<img class="img-thumbnail" src="'.getImageByName("img/", $region_name, 1).'" alt="'.$region_name.'" >';
+            echo '<img class="img-thumbnail img-responsive" src="'.getImageByName("img/", $region_name, 1).'" alt="'.$region_name.'" >';
             echo '</a>';
             echo '</div>';
             echo '</div>';
@@ -89,6 +93,9 @@ if (isset($_GET['details']))
             echo '</form>';
             echo '</div>';
             echo '</div>';
+            echo '</div>';
+            echo '<div class="clearfix"></div>';
+            echo "<hr>";
         }
 
         $db = null;
