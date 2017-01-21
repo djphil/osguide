@@ -1,14 +1,18 @@
 <?php
 session_start();
 header('Content-Type: text/html; charset=utf-8');
+ini_set('magic_quotes_gpc', 0);
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 $dbhost = "localhost";
 $dbuser = "root";
 $dbpass = "<DB PASS>";
 $dbname = "<DB NAME>";
-$tbname = "osguide_destination";
+$tbname = "osguide_destinations";
 
 $osguide = "OpenSim Destination Guide";
+$version = "0.2";
 $debug = FALSE;
 
 /* SQLite 3 */
