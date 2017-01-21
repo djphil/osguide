@@ -9,7 +9,7 @@
                 </button>
           
                 <a class="navbar-brand" href="./">
-                    <i class="glyphicon glyphicon-th-large"></i> <strong>OSDG</strong>
+                    <i class="glyphicon glyphicon-th-large"></i> <strong>LOGO</strong>
                 </a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
