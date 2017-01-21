@@ -20,7 +20,7 @@ else include_once("PDO-mysql.php");
 <?php
 if (isset($_GET['categorie'])) 
 {
-	$categorie_number   = htmlspecialchars($_GET["categorie"]);
+	$categorie_number   = htmlspecialchars($_GET['categorie']);
     $categorie_name     = getCategorieByNumber($categorie_number);
     $categorie_number   = getCategorieByName($categorie_name);
 
