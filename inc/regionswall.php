@@ -4,7 +4,7 @@ else $random = "RAND()";
 
 if (isset($_GET['orderby']))
 {
-	$orderby = htmlspecialchars($_GET["orderby"]);
+	$orderby = htmlspecialchars($_GET['orderby']);
     if ($orderby === "id")              $orderby = "id ASC";
     else if ($orderby === "region")     $orderby = "region_name ASC";
     else if ($orderby === "owner")      $orderby = "owner_name ASC";
@@ -19,7 +19,7 @@ else {$orderby = "id ASC";}
 
 if (isset($_GET['categorie']))
 {
-	$categorie = htmlspecialchars($_GET["categorie"]);
+	$categorie = htmlspecialchars($_GET['categorie']);
 }
 
 else {$categorie = "All Categories";}
@@ -84,23 +84,16 @@ try {
         $region_name = $row->region_name;
         $owner_name = $row->owner_name ;
         $owner_uuid = $row->owner_uuid;
-        // $object_name = $row['object_name'];
-        // $object_uuid = $row['region_uuid'];
         $categorie_name = $row->categorie_name;
         $agents_online = $row->agents_online;
-        // $locX = $row['locX'];
-        // $locY = $row['locY'];
-        // $sizeX = $row['sizeX'];
-        // $sizeY = $row['sizeY'];
-        // $aera = $sizeX * $sizeY;
         $local_position = $row->local_position;
         $region_aera = 65536;
-        $last_update = $row->date;
+        $last_update  = date("d/m/Y h:m:s", $row->date);
 
         echo '<div class="col-xs-12 col-sm-6 col-md-4">';
         echo '<div class="text-left rounded border boxer">';
         echo '<a href="?details='.$region_name.'" target="_self" style="text-decoration: none;">';
-        echo '<img class="img-thumbnail" src="'.getImageByName("img/", $region_name, 1).'" alt="'.$region_name.'" >';
+        echo '<img class="img-thumbnail img-responsive" src="'.getImageByName("img/", $region_name, 1).'" alt="'.$region_name.'" >';
         echo '<div class="regions ">';
         echo '<p>';
         echo $id.' : '.$region_name.' <span class="pull-right">'.$region_aera.' m²</span><br />';
