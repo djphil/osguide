@@ -65,8 +65,8 @@ if (isset($_POST['terminal']))
         $agents_list = base64_decode(htmlspecialchars($_POST["agents_list"]));
         $agents_online = explode(',', $agents_list);
 
-        if ($agents_online[0] === "") $agents_online = 0;
-        else $agents_online = count($agents_list);
+        if ($agents_online[0] == "") $agents_online = 0;
+        else $agents_online = count($agents_online);
 
         $http_server_url = base64_decode(htmlspecialchars($_POST["http_server_url"]));
         $buffer = explode("/lslhttp/", $http_server_url);
