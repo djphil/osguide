@@ -63,7 +63,7 @@ if (isset($_POST['terminal']))
         // $categorie_number = htmlspecialchars($_POST["categorie_number"]);
 
         $agents_list = base64_decode(htmlspecialchars($_POST["agents_list"]));
-        $agents_online = explode(',', $agents_list, 0);
+        $agents_online = explode(',', $agents_list);
 
         if ($agents_online[0] === "") $agents_online = 0;
         else $agents_online = count($agents_list);
