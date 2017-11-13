@@ -17,7 +17,7 @@ $debug = FALSE;
 
 /* SQLite 3 */
 $useSQLite = FALSE;
-$SQLitePath = "E:/xampp/htdocs/osguide/db/";
+$SQLitePath = "D:/xampp/htdocs/osguide/db/";
 
 $useTheme = TRUE;
 /* Navbar Style */

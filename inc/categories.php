@@ -10,19 +10,24 @@ $categories = getDefaultDestinationCategories();
 foreach ($categories as $categorie)
 {
     if ($categorie === "All Categories")
-    $sql = $db->prepare("
-        SELECT categorie_name 
-        FROM ".$tbname." 
-    ");
+    {
+        $sql = $db->prepare("
+            SELECT categorie_name 
+            FROM ".$tbname." 
+        ");
+    }
 
     else
-    $sql = $db->prepare("
-        SELECT categorie_name 
-        FROM ".$tbname." 
-        WHERE categorie_name = ?
-    ");
+    {
+        $sql = $db->prepare("
+            SELECT categorie_name 
+            FROM ".$tbname." 
+            WHERE categorie_name = ?
+        ");
 
-    $sql->bindValue(1, $categorie, PDO::PARAM_STR);
+        $sql->bindValue(1, $categorie, PDO::PARAM_STR);
+    }
+
 
     try {
         if ($categorie === "All Categories")

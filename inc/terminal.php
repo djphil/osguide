@@ -118,17 +118,17 @@ if (isset($_POST['terminal']))
             SELECT * 
             FROM $tbname 
             WHERE (
-                region_name = '".$region_name."' 
+                region_name = ?
                 AND 
-                object_uuid = '".$object_uuid."' 
+                object_uuid = ?
                 AND 
-                owner_uuid = '".$owner_uuid."'
+                owner_uuid = ?
             )
         ");
 
         $query->bindValue(1, $region_name, PDO::PARAM_STR);
-        $query->bindValue(2, $object_uuid, PDO::PARAM_STR);
-        $query->bindValue(3, $owner_uuid, PDO::PARAM_STR);
+        $query->bindValue(2, $owner_uuid, PDO::PARAM_STR);
+        $query->bindValue(3, $object_uuid, PDO::PARAM_STR);
 
         $query->execute();
 
