@@ -1,10 +1,14 @@
-// OpenSim Destination Guide Terminal v0.1 by djphil (CC-BY-NC-SA 4.0)
+// OpenSim Destination Guide Terminal v0.2 by djphil (CC-BY-NC-SA 4.0)
 
 string  targetUrl      = "http://domaine.com/osguide/";
 string  terminal_name  = "OpenSim Destination Guide Terminal";
 string  categorie_name = "Official location";
 float   update_rate    = 300.0;
 integer display_debug  = FALSE;
+integer display_guide  = TRUE;
+integer display_text   = TRUE;
+integer exclude_npc    = TRUE;
+integer face           = ALL_SIDES;
 
 // 1 Official location
 // 3 Arts and culture
@@ -31,15 +35,17 @@ key ping_request_id;
 
 terminal_fullbright_flash()
 {
-    llSetLinkPrimitiveParamsFast(LINK_SET, [PRIM_FULLBRIGHT, ALL_SIDES, TRUE]);
+    llSetLinkPrimitiveParamsFast(LINK_SET, [PRIM_FULLBRIGHT, face, TRUE]);
     llSleep(0.25);
-    llSetLinkPrimitiveParamsFast(LINK_SET, [PRIM_FULLBRIGHT, ALL_SIDES, FALSE]);
+    llSetLinkPrimitiveParamsFast(LINK_SET, [PRIM_FULLBRIGHT, face, FALSE]);
 }
 
 key addRegionToDestinationGuideID;
 addRegionToDestinationGuide(string url)
 {
-    list agents_list = llGetAgentList(AGENT_LIST_PARCEL_OWNER, []);
+    integer scope = AGENT_LIST_PARCEL_OWNER;
+    if (exclude_npc) scope = AGENT_LIST_PARCEL_OWNER | AGENT_LIST_EXCLUDENPC;
+    list agents_list = llGetAgentList(scope, []);
     integer agents_online = llGetListLength(agents_list);
 
     addRegionToDestinationGuideID = llHTTPRequest(targetUrl + "inc/terminal.php",
@@ -104,8 +110,10 @@ default
 
         llSetObjectName(llGetScriptName());
         llSetObjectDesc("Digital Concepts (CC-BY-NC-SA 4.0)");
-        llSetText("[✪ TERMINAL ✪]\n" + region_name + "\n(" + owner_name + ")", <1.0, 1.0, 1.0>, 1.0);
-        llSetTexture(osGetMapTexture(),ALL_SIDES); // TL None
+        if (display_text) llSetText("[✪ TERMINAL ✪]\n" + region_name + "\n(" + owner_name + ")", <1.0, 1.0, 1.0>, 1.0);
+        else llSetText("", <1.0, 1.0, 1.0>, 1.0);
+
+        llSetTexture(osGetMapTexture(), face);
         llSetTimerEvent(0.1);
     }
 
@@ -164,12 +172,12 @@ default
             return;
         }
 
-        if (id == tiny_request_id)
+        if (id == tiny_request_id && display_guide)
             llSay(PUBLIC_CHANNEL, "Guide @ " + body);
-        if (id == serv_request_id)
-            llSay(PUBLIC_CHANNEL, "Server @ " + body);
+        if (id == serv_request_id && display_debug)
+            llOwnerSay("Server @ " + body);
             
-        if (id == addRegionToDestinationGuideID && display_debug == TRUE)
+        if (id == addRegionToDestinationGuideID && display_debug)
         {
             string text  = "\n============================";
                    text += "\n" + llStringTrim(body, STRING_TRIM);
@@ -177,7 +185,7 @@ default
             llOwnerSay(text);
         }
 
-        if (id == ping_request_id && display_debug == TRUE)
+        if (id == ping_request_id && display_debug)
         {
             string text  = "\n============================";
                    text += "\n" + llStringTrim(body, STRING_TRIM);
