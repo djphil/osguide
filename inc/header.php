@@ -23,8 +23,9 @@
         <?php if ($useTheme === TRUE): ?>
             <link href="css/bootstrap-theme.min.css" rel="stylesheet">
         <?php endif ?>
-        <link href="css/starter-template.css" rel="stylesheet">
+
         <link rel="stylesheet" href="css/gh-fork-ribbon.min.css" />
+        <link href="css/osguide.css" rel="stylesheet">
 
         <!--[if lt IE 9]>
             <link rel="stylesheet" href="css/gh-fork-ribbon.ie.min.css" />

@@ -1,4 +1,4 @@
-// OpenSim Destination Guide Terminal v0.2 by djphil (CC-BY-NC-SA 4.0)
+// OpenSim Destination Guide Terminal v0.3 by djphil (CC-BY-NC-SA 4.0)
 
 string  targetUrl      = "http://domaine.com/osguide/";
 string  terminal_name  = "OpenSim Destination Guide Terminal";
@@ -27,6 +27,7 @@ string server_uuid;
 string region_name;
 string owner_name;
 string owner_uuid;
+string script_name;
 
 key http_request_id;
 key tiny_request_id;
@@ -70,27 +71,22 @@ verify_region_parcel_owner()
 {
     list parcel_details   = llGetParcelDetails(llGetPos(), [PARCEL_DETAILS_NAME, PARCEL_DETAILS_OWNER]);
     string parcel_name    = llList2String(parcel_details, 0);
-    key parcel_owner_uuid = llList2String(parcel_details, 1);
-    key object_owner_uuid = llGetOwner();
+    key parcel_owner_uuid = llList2Key(parcel_details, 1);
 
-    if (object_owner_uuid == parcel_owner_uuid)
+    if (owner_uuid != parcel_owner_uuid)
     {
-        llResetScript();
-    }
-
-    else
-    {
-        llOwnerSay("\nDésolé " + osKey2Name(object_owner_uuid) + " la parcelle " + parcel_name + " ne t'appartient pas ...");
+        llOwnerSay("\nDésolé " + owner_uuid + ", la parcelle " + parcel_name + " ne t'appartient pas ...");
 
         llInstantMessage(parcel_owner_uuid, 
-            "Bonjour " + osKey2Name(parcel_owner_uuid) + 
+            "[ALERT] " + osKey2Name(parcel_owner_uuid) + 
             "\nUn object nomé \"" + llGetObjectName() + "\"" + 
-            " à été rezzer par " + llKey2Name(object_owner_uuid) + 
+            " contenant un script nomé \"" + script_name + "\"" + 
+            " à été rezzer par " + owner_name + 
             " sur la parcelle " + parcel_name + 
-            " de la région " + llGetRegionName() +
+            " de la région " + region_name +
             " sur la grille " + osGetGridName() +
             "\n[OBJET UUID] " + llGetKey() +
-            "\n[OWNER UUID] " + object_owner_uuid
+            "\n[OWNER UUID] " + owner_uuid
         );
 
         llDie();
@@ -102,14 +98,17 @@ default
     state_entry()
     {
         llOwnerSay("Initialisation ...");
-        verify_region_parcel_owner();
 
-        region_name = llGetRegionName();
         owner_uuid  = llGetOwner();
         owner_name  = osKey2Name(owner_uuid);
+        region_name = llGetRegionName();
+        script_name = llGetScriptName();
 
-        llSetObjectName(llGetScriptName());
+        verify_region_parcel_owner();
+
+        llSetObjectName(script_name);
         llSetObjectDesc("Digital Concepts (CC-BY-NC-SA 4.0)");
+
         if (display_text) llSetText("[✪ TERMINAL ✪]\n" + region_name + "\n(" + owner_name + ")", <1.0, 1.0, 1.0>, 1.0);
         else llSetText("", <1.0, 1.0, 1.0>, 1.0);
 
@@ -172,6 +171,8 @@ default
             return;
         }
 
+        body = llStringTrim(body, STRING_TRIM);
+
         if (id == tiny_request_id && display_guide)
             llSay(PUBLIC_CHANNEL, "Guide @ " + body);
         if (id == serv_request_id && display_debug)
@@ -180,7 +181,7 @@ default
         if (id == addRegionToDestinationGuideID && display_debug)
         {
             string text  = "\n============================";
-                   text += "\n" + llStringTrim(body, STRING_TRIM);
+                   text += "\n" + body;
                    text += "\n============================";
             llOwnerSay(text);
         }
@@ -188,9 +189,23 @@ default
         if (id == ping_request_id && display_debug)
         {
             string text  = "\n============================";
-                   text += "\n" + llStringTrim(body, STRING_TRIM);
+                   text += "\n" + body;
                    text += "\n============================";
             llOwnerSay(text);  
+        }
+
+        if (body == "HOST_RESTRICTION")
+        {
+            body  = "\n* Votre \"host\" n'est pas autorisé à utiliser ce guide ...";
+            body += "\n* La région \"" + region_name + "\" n'a pas été ajoutées ...";
+            llOwnerSay("[WARNING] " + owner_name + body);
+        }
+
+        if (body == "UUID_RESTRICTION")
+        {
+            body  = "\n* La catégorie \"" + categorie_name + "\" est réservée ...";
+            body += "\n* La région \"" + region_name + "\" n'a pas été ajoutées ...";
+            llOwnerSay("[WARNING] " + owner_name + body);
         }
     }
 

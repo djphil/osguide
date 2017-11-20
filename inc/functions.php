@@ -106,4 +106,42 @@ function getCategorieByName($name)
     else if ($name == "Rental") return 14;
     return -1;
 }
+
+function create_logs_file($file_name, $file_content, $debug)
+{
+    $file_content = trim($file_content);
+
+    if (file_exists($file_name))
+    {
+        if (is_writable($file_name))
+        {
+            if (!$handle = fopen($file_name, 'a'))
+            {
+                 if ($debug) echo "\nImpossible d'ouvrir le fichier ($file_name)";
+                 // exit;
+            }
+
+            if (fwrite($handle, $file_content."\n") === FALSE)
+            {
+                if ($debug) echo "\nImpossible d'écrire dans le fichier ($file_name)";
+                // exit;
+            }
+
+            if ($debug) echo "\nL'écriture de ($file_content) dans le fichier ($file_name) a réussi";
+            fclose($handle);
+        }
+
+        else
+        {
+            if ($debug) echo "\nLe fichier ($file_name) n'est pas accessible en écriture ...";
+        }
+    }
+
+    else
+    {
+        if ($debug) echo "\nLe fichier ($file_name) n'existe pas ...";
+        file_put_contents($file_name, $file_content, FILE_APPEND);
+        create_log_files($file_name, $file_content);
+    }
+}
 ?>

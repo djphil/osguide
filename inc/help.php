@@ -1,13 +1,12 @@
-<h1><?php echo $osguide; ?> <span class="pull-right">Help</span></h1>
-<section>
-<article>
-    Coming soon ...
-</article>
+<h1>Help<i class="glyphicon glyphicon-education pull-right"></i></h1>
+Welcome to the <?php echo $osguide." v".$version; ?>
 
 <article>
     <h2>Features</h2>
     SQLite 3 and Mysql compatible<br />
     100 Terminals by Simulator<br />
+    Access restiction (host/uuid)<br />
+    Security logs<br />
     Agents online counter<br />
     More coming ...
     <h3>Inworld:</h3>
@@ -106,11 +105,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">OpenSim Destination Guide Terminal v0.1.lsl</h4>
+                <h4 class="modal-title">OpenSim Destination Guide Terminal v0.3.lsl</h4>
             </div>
             <div class="modal-body">
                 <?php
-                $file = file_get_contents('lsl/OpenSim Destination Guide Terminal v0.1.lsl', true);
+                $file = file_get_contents('lsl/OpenSim Destination Guide Terminal v0.3.lsl', true);
                 echo '<pre>'.$file.'</pre>';
                 ?>
             </div>

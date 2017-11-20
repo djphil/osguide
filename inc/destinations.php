@@ -11,7 +11,7 @@ else include_once("PDO-mysql.php");
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../css/osguide.css">
+    <link rel="stylesheet" href="../css/osguide-inworld.css">
     <title><?php echo $osguide; ?></title>
 </head>
 
