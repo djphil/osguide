@@ -1,21 +1,9 @@
 /* CSS v0.1 by djphil (CC-BY-NC-SA 4.0) */
 
-html {
-    position: relative;
-    min-height: 100%;
-}
-
+html {position: relative; min-height: 100%;}
 body {padding-top: 50px; margin-bottom: 60px;}
 
-img {
-    width: 100%;
-    height: 175px !important;
-}
-
-.container .text-muted {
-    margin: 20px 0px;
-}
-
+.container .text-muted {margin: 20px 0px;}
 .green {color: #00FF00;}
 .red {color: #FF0000;}
 .green img {height: 16px; width: 16px;}
@@ -80,9 +68,7 @@ img {
    from {opacity: 0;}
    to {opacity: 1;}
 }
-.content {
-    animation: fadein 0.5s;
-}
+.content {animation: fadein 0.5s;}
 
 /* Bootstrap 4.0 */
 .file {
@@ -118,9 +104,7 @@ img {
     border-radius: .25rem;
 }
 
-.file-custom::after {
-    content: "Choose file...";
-}
+.file-custom::after {content: "Choose file...";}
 
 .file-custom::before {
     position: absolute;
