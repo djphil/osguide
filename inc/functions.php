@@ -77,7 +77,7 @@ function getCategorieByNumber($number)
     else if ($number == 1) return "Official location";
     else if ($number == 3) return "Arts and culture";
     else if ($number == 4) return "Business";
-    else if ($number == 5) return "Educationnal";
+    else if ($number == 5) return "Educational";
     else if ($number == 6) return "Gaming";
     else if ($number == 7) return "Hangout";
     else if ($number == 8) return "Newcomer friendly";
