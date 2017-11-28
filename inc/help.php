@@ -97,7 +97,7 @@ Welcome to the <?php echo $osguide." v".$version; ?>
 
 <article>
     <h2>Donation</h2>
-    <?php include_once("inc/paypal.php"); ?>
+    <p><?php include_once("inc/paypal.php"); ?></p>
 </article>
 
 <div class="modal fade" id="terminal" role="dialog">
