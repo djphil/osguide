@@ -1,3 +1,5 @@
+<h1>Wall<i class="glyphicon glyphicon-home pull-right"></i></h1>
+
 <?php
 if ($useSQLite == TRUE) $random = "random()";
 else $random = "RAND()";
@@ -46,7 +48,6 @@ try {
         $sql->execute();
     else $sql->execute(array($categorie));
 
-    echo '<section><article><h1>'.$osguide.'<span class="pull-right">Wall</span></h1>';
     include("orderby.php");
 
     /* SQLITE */
@@ -124,6 +125,6 @@ catch(PDOException $e) {
     die($message);
 }
 
-echo '</center></article></section>';
+echo '</center>';
 $sql = null;
 ?>

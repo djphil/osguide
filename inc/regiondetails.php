@@ -1,3 +1,5 @@
+<h1>Details<i class="glyphicon glyphicon-home pull-right"></i></h1>
+
 <?php
 if (isset($_GET['details']))
 {
@@ -12,8 +14,6 @@ if (isset($_GET['details']))
 
     try {
         $sql->execute(array($region_name));
-
-        echo '<section><article><h1>'.$osguide.'<span class="pull-right">Details</span></h1>';
 
         /* SQLITE */
         if ($useSQLite === TRUE) {
@@ -114,7 +114,7 @@ if (isset($_GET['details']))
         die($message);
     }
 
-    echo '</center></article></section>';
+    echo '</center>';
     $sql = null;
     $db = null;
 }

@@ -1,6 +1,4 @@
-<section>
-<article>
-<h1><?php echo $osguide; ?><span class="pull-right">Home</span></h1>
+<h1>Home<i class="glyphicon glyphicon-home pull-right"></i></h1>
 
 <?php include_once("nav.php"); ?>
 
@@ -68,7 +66,7 @@ foreach ($categories as $categorie)
         die($message);
     }
 
-    echo '</center></article></section>';
+    echo '</center>';
 }
 
 $sql = null;

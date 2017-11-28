@@ -1,6 +1,4 @@
-<section>
-
-<h1><?php echo $osguide; ?> <span class="pull-right">Search</span></h1>
+<h1>Search<i class="glyphicon glyphicon-search pull-right"></i></h1>
 
 <!-- TODO
 <form class="form-inline spacer" role="search" action="" enctype="multipart/form-data" method="POST">
@@ -80,7 +78,7 @@ if (isset($_POST['search']))
         if ($useSQLite == TRUE) $row = $query->rowCount() >= 0;
         else $row = $query->rowCount() != 0;
         
-        echo "<h2>Search result(s):</h2>\n";
+        echo "<h3>Result(s):</h3>\n";
 
         if ($row)
         {
@@ -137,4 +135,3 @@ unset($object_name);
 unset($categorie_name);
 $query = null;
 ?>
-</section>
