@@ -89,7 +89,7 @@ try {
         $agents_online = $row->agents_online;
         $local_position = $row->local_position;
         $region_aera = 65536;
-        $last_update  = date("d/m/Y h:m:s", $row->date);
+        $last_update = date("d/m/Y h:i:s", $row->date);
 
         echo '<div class="col-xs-12 col-sm-6 col-md-4">';
         echo '<div class="text-left rounded border boxer">';

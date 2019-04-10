@@ -62,7 +62,7 @@ if (isset($_GET['details']))
             // $aera = $sizeX * $sizeY;
             $local_position = $row->local_position;
             $region_aera = 65536;
-            $last_update  = date("d/m/Y h:m:s", $row->date);
+            $last_update = date("d/m/Y h:i:s", $row->date);
 
             echo '<div class="col-md-12">';
             echo '<div class="col-md-6">';
