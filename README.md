@@ -1,4 +1,4 @@
-# osguide v0.2
+# osguide v0.4
 OpenSim Destination Guide v0.2 by djphil (CC-BY-NC-SA 4.0)
 
 ## Help
