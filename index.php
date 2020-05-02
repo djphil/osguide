@@ -30,7 +30,7 @@ else
     include_once("inc/PDO-mysql.php");
 }
 ?>
-<?php // include_once("inc/PDO-mysql.php"); ?>
+
 <?php include_once("inc/functions.php"); ?>
 
 <?php
@@ -41,12 +41,9 @@ if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') && $useGzip === TRUE)
 else ob_start();
 
 if ($page === 'home') {require 'inc/home.php';}
-else if ($page === 'destinations') {require 'inc/destinations.php';}
 else if ($page === 'destinations-wall') {require 'inc/destinations-wall.php';}
 else if ($page === 'destinations-list') {require 'inc/destinations-list.php';}
 else if ($page === 'destinations-details') {require 'inc/destinations-details.php';}
-// else if ($page === 'destinations-inworld') {require 'inc/destinations-inworld.php';}
-// else if ($page === 'refresh') {require 'inc/refresh.php';}
 else if ($page === 'reorder') {require 'inc/reorder.php';}
 else if ($page === 'help') {require 'inc/help.php';}
 else if ($page === 'search') {require 'inc/search.php';}
@@ -57,7 +54,5 @@ else if ($page === '404') {require 'inc/404.php';}
 else require("inc/404.php");
 $content = ob_get_clean();
 require 'inc/template.php';
-// if ($page === 'destinations-inworld') echo $content;
-// else require 'inc/template.php';
 exit();
 ?>
