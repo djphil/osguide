@@ -27,17 +27,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `osguide_destinations` (
-  `id` int(16) UNSIGNED NOT NULL,
-  `region_name` varchar(64) NOT NULL,
-  `owner_name` varchar(64) NOT NULL,
-  `owner_uuid` varchar(36) NOT NULL,
-  `object_name` varchar(64) NOT NULL,
-  `object_uuid` varchar(36) NOT NULL,
-  `categorie_name` varchar(32) NOT NULL,
-  `local_position` varchar(16) NOT NULL,
-  `http_server_url` varchar(128) NOT NULL,
-  `agents_online` int(4) NOT NULL,
-  `date` int(11) NOT NULL
+    `id` int(16) UNSIGNED NOT NULL,
+    `region_name` varchar(64) NOT NULL,
+    `owner_name` varchar(64) NOT NULL,
+    `owner_uuid` varchar(36) NOT NULL,
+    `object_name` varchar(64) NOT NULL,
+    `object_uuid` varchar(36) NOT NULL,
+    `categorie_name` varchar(32) NOT NULL,
+    `local_position` varchar(16) NOT NULL,
+    `http_server_url` varchar(128) NOT NULL,
+    `agents_online` int(4) NOT NULL,
+    `date` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -48,7 +48,7 @@ CREATE TABLE `osguide_destinations` (
 -- Index pour la table `osguide_destinations`
 --
 ALTER TABLE `osguide_destinations`
-  ADD PRIMARY KEY (`id`);
+    ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -58,7 +58,7 @@ ALTER TABLE `osguide_destinations`
 -- AUTO_INCREMENT pour la table `osguide_destinations`
 --
 ALTER TABLE `osguide_destinations`
-  MODIFY `id` int(16) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+    MODIFY `id` int(16) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,51 +1,6 @@
+<?php if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {die('Access denied ...');} ?>
 <h1>Search<i class="glyphicon glyphicon-search pull-right"></i></h1>
-
-<!-- TODO
-<form class="form-inline spacer" role="search" action="" enctype="multipart/form-data" method="POST">
-    <div class="form-group">
-        <label for="searchwordFOR">Search Word :</label>
-        <input type="text" class="form-control" id="searchwordID" name="searchword" placeholder="Terminal">
-    </div>
-    <button id="Submit" name="submit" type="submit" class="btn btn-default">
-        <i class="glyphicon glyphicon-search"></i> Search
-    </button>
-</form>
--->
-
-<!-- TODO
-<article>
-    <h2>Search by Region</h2>
-    Region Word : <input type="text" name="regionname" maxlength="64"><br />
-    Region UUID : <input type="text" name="regionuuid" maxlength="36"><br />
-</article>
-
-<article>
-    <h2>Search by Owner</h2>
-    Owner Name : <input type="text" name="ownername" maxlength="64"><br />
-    Owner UUID : <input type="text" name="owneruuid" maxlength="36"><br />
-</article>
-
-<article>
-    <h2>Search by Category</h2>
-    <input type="checkbox" name="OfficialLocation" value="OfficialLocation">Official location<br />
-    <input type="checkbox" name="ArtAndCulture" value="ArtAndCulture">Art and culture<br />
-    <input type="checkbox" name="Business" value="Business">Business<br />
-    <input type="checkbox" name="Educationnal" value="Educationnal">Educationnal<br />
-    <input type="checkbox" name="Gaming" value="Gaming">Gaming<br />
-    <input type="checkbox" name="Hangout" value="Hangout">Hangout<br />
-    <input type="checkbox" name="NewcomerFriendly" value="NewcomerFriendly">Newcomer Friendly<br />
-    <input type="checkbox" name="ParkAndNature" value="ParkAndNature">Park and Nature<br />
-    <input type="checkbox" name="Residential" value="Residential">Residential<br />
-    <input type="checkbox" name="Shopping" value="Shopping">Shopping<br />
-    <input type="checkbox" name="Other" value="Other">Other<br />
-    <input type="checkbox" name="Rental" value="Rental">Rental<br />
-</article>
-
-<article>
-    <input id="Submit" name="submit" type="submit" value="Submit" /> 
-    <input id="Reset" name="reset" type="reset" value="Reset" /><br />
-</article>
--->
+<div class="clearfix"></div>
 
 <?php
 if (isset($_POST['search']))
@@ -55,7 +10,7 @@ if (isset($_POST['search']))
         $search_word  = htmlspecialchars($_POST['searchword']);
         $query = ('
             SELECT * 
-            FROM '.$tbname.' 
+            FROM '.TB_DESTINATIONS.' 
             WHERE region_name LIKE ?
             OR owner_name LIKE ?
             OR owner_uuid LIKE ? 
@@ -75,56 +30,69 @@ if (isset($_POST['search']))
 
         $query->execute();
 
-        if ($useSQLite == TRUE) $row = $query->rowCount() >= 0;
-        else $row = $query->rowCount() != 0;
-        
-        echo "<h3>Result(s):</h3>\n";
+        if ($useSQLite == TRUE) $count = $query->rowCount() >= 0;
+        else $count = $query->rowCount() != 0;
 
-        if ($row)
+        if ($count)
         {
-            $counter = 0;
+            $counter = null;
 
-            echo "<p>";
+            echo '<table class="table table-striped table-hover">';
+            echo '<thead>';
+            echo '<tr>';
+            echo '<th>#</th>';
+            echo '<th>Destination name</th>';
+            echo '<th>Category name</th>';
+            echo '<th>Terminal name</th>';
+            echo '<th>Owner name</th>';
+            echo '<th class="text-right">Details</th>';
+            echo '</tr>';
+            echo '</thead>';
 
+            echo '<tbody>';
             while ($result = $query->fetch()) 
             {
                 $region_name    = $result['region_name'];
-                $owner_name     = $result['owner_name'];
+                // $categorie_name = $result['categorie_name'];
+                // $object_name    = $result['object_name'];
+                // $owner_name     = $result['owner_name'];
                 // $owner_uuid  = $result['owner_uuid'];
-                $object_name    = $result['object_name'];
                 // $object_uuid = $result['object_uuid'];
-                $categorie_name = $result['categorie_name'];
-                echo "\n<span class='badge'>".++$counter.
-                     "</span> ".$region_name.
-                     " (".$owner_name.
-                     ") from ".$object_name.
-                     " in categorie ".$categorie_name.
-                     "<br />\n";
+                echo '<tr>';
+                // echo '<td>'.$counter.'</td>';
+                // echo '<td>'.$region_name.'</td>';
+                // echo '<td>'.$owner_name.'</td>';
+                // echo '<td>'.$object_name.'</td>';
+                // echo '<td>'.$categorie_name.'</td>';
+                echo '<td>'.++$counter.'</td>';
+                echo '<td>'.$region_name.'</td>';
+                echo '<td>'.$result['categorie_name'].'</td>';
+                echo '<td>'.$result['object_name'].'</td>';
+                echo '<td>'.$result['owner_name'].'</td>';
+                echo '<td class="text-right">';
+                echo '<a class="btn btn-primary btn-xs" href="?page=destinations-details&details='.$region_name.'">';
+                echo '<i class="glyphicon glyphicon-info-sign "></i> More infos</a>';
+                echo '</td>';
+                echo '</tr>';
             }
-
-            echo "</p>";
+            echo '</tbody>';
+            echo "</table>";
         }
 
-        else 
-        {
-            echo 'Nothing found';
-        }
+        else echo '<p>Result found: <span class="badge">0</span></p>';
     }
 
     else 
     {
-        // $_SESSION[flash][danger] = "Please enter a search query";
-        echo '<p class="alert alert-danger alert-anim">';
-        echo '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>';
-        echo 'Please enter a search query</p>';
+        $_SESSION['flash']['warning'] = "Please enter a search word ...";
+        echo '<p>Result found: <span class="badge">0</span></p>';
     }
 }
 
 else
 {
-    echo '<p class="alert alert-danger alert-anim">';
-    echo '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>';
-    echo 'Please enter a search query</p>';
+    $_SESSION['flash']['danger'] = "Please enter a search query ...";
+    echo '<p>Result found: <span class="badge">0</span></p>';
 }
 
 unset($region_name);

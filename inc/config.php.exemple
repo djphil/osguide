@@ -5,34 +5,58 @@ ini_set('magic_quotes_gpc', 0);
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-$osguide = "OpenSim Destination Guide";
-$version = "0.3";
-$debug = FALSE;
+/*
+ * Database
+ */
+$dbhost = "<DB_HOST>";
+$dbuser = "<DB_USER>";
+$dbpass = "<DB_PASS>";
+$dbname = "<DB_NAME>";
+$dbmodu = "osmodules";
 
-$dbhost = "localhost";
-$dbuser = "root";
-$dbpass = "<DB PASS>";
-$dbname = "<DB NAME>";
-$tbname = "osguide_destinations";
+// OpenSim tables
+define('TB_USERACCOUNTS', $dbname.'.useraccounts');
+define('TB_AUTH', $dbname.'.auth');
+
+// osguide tables
+define('TB_DESTINATIONS', $dbmodu.'.osguide_destinations');
 
 /* SQLite 3 */
 $useSQLite = FALSE;
-$SQLitePath = "D:/xampp/htdocs/osguide/db/";
+$SQLitePath = "D:/xampp/htdocs/osmodules/osguide/db/";
+
+/*
+ * General
+ */
+$title = "OpenSim Destination Guide";
+$version = "0.4";
+$lisense = "CC-BY-NC-SA 4.0";
+$lisense_url = "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.fr";
+define("NULL_KEY", "00000000-0000-0000-0000-000000000000");
+
+$debug = TRUE;
+$useGzip = TRUE;
+$display_ribbon = TRUE;
+$github_url = "https://github.com/djphil/osguide";
+$script_url = "lsl/OpenSim Destination Guide Terminal v0.3.lsl";
+
+$wall_columns = 3; // 3 or 4
+$cats_columns = 3; // 3 or 4
 
 /* Security */
 $create_log = TRUE;
 $access_log = "../logs/access_log.txt";
 
-// This limit region registre 
+// This limit region registration 
 // to Destination Guide by host's
 $limit_hosts = TRUE;
 $white_hosts = [
-    "<ALLOWED_HOST>",
+   "<ALLOWED_HOST>",
     "domain.com",
     ""
 ];
 
-// This limit region resistration 
+// This limit region registration 
 // to "Official Location" category by uuid's
 $limit_uuids = TRUE;
 $white_uuids = [

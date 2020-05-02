@@ -1,33 +1,33 @@
 <?php
 include_once("config.php");
 include_once("functions.php");
-
-if ($useSQLite === TRUE)
-    include_once("PDO-sqlite.php");
+if ($useSQLite === TRUE) include_once("PDO-sqlite.php");
 else include_once("PDO-mysql.php");
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="description" content="<?php echo $title." v".$version; ?>">
+    <meta name="author" content="Philippe Lemaire (djphil)">
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="author" href="../inc/humans.txt" />
     <link rel="stylesheet" href="../css/osguide-inworld.css">
-    <title><?php echo $osguide; ?></title>
+    <title><?php echo $title.' v'.$version; ?></title>
 </head>
-
 <body>
-
 <?php
 if (isset($_GET['categorie'])) 
 {
-	$categorie_number   = htmlspecialchars($_GET['categorie']);
-    $categorie_name     = getCategorieByNumber($categorie_number);
-    $categorie_number   = getCategorieByName($categorie_name);
+	$categorie_number = htmlspecialchars($_GET['categorie']);
+    $categorie_name = getCategorieByNumber($categorie_number);
+    $categorie_number = getCategorieByName($categorie_name);
 
     echo "<h1>";
-    echo '<a href="destinations.php">'.$osguide.' : </a>'.$categorie_name;
-    echo '<span><a href="destinations.php?categories">Back to Categories</a></span>';
+    echo '<a href="destinations-inworld.php">'.$title.' : </a>'.$categorie_name;
+    echo '<span class="pull-right"><a href="destinations-inworld.php?categories">Back to Categories</a></span>';
     echo "</h1>";
+    echo '<div class="clearfix"></div>';
     echo '<hr class="up">';
     echo '<hr class="down">';
     echo '<div id="regionguide_container">';
@@ -37,7 +37,7 @@ if (isset($_GET['categorie']))
     {
         $query = $db->prepare("
             SELECT categorie_name, region_name, local_position, agents_online
-            FROM ".$tbname." 
+            FROM ".TB_DESTINATIONS." 
         ");
     }
 
@@ -45,7 +45,7 @@ if (isset($_GET['categorie']))
     {
         $query = $db->prepare("
             SELECT categorie_name, region_name, local_position, agents_online
-            FROM ".$tbname." 
+            FROM ".TB_DESTINATIONS." 
             WHERE categorie_name 
             LIKE '%{$categorie_name}%'
         ");
@@ -86,7 +86,8 @@ if (isset($_GET['categorie']))
         echo '<div class="regions">';
         echo '<hr class="up">';
         echo '<hr class="down">'.$region_name;
-        echo '<span>'.$agents_online.'</span>';
+        echo ' <span class="pull-right">Users: '.$agents_online.'</span>';
+        echo '<div class="clearfix"></div>';
         echo '<hr class="up">';
         echo '<hr class="down">';
         echo '<hr class="up">';
@@ -104,15 +105,20 @@ if (isset($_GET['categorie']))
 else
 {
     echo '<h1>';
-    echo '<a href="destinations.php">'.$osguide.' :</a> Categories';
-    echo '<span><a href="secondlife://Digital Concepts/128/128/25" target="_self" style="text-decoration: none;">Teleport to OpenSim</a></span>';
+    echo '<a href="destinations-inworld.php">'.$title.' :</a> Categories';
+    echo '<div class="pull-right">';
+    echo '<a href="secondlife://Digital Concepts/128/128/25" target="_self" style="text-decoration: none;">Teleport to OpenSim</a>';
+    echo '<span id="myBtn" class="badge"><a href=#" target="_self">?</a></span>';
+    echo '</div>';
     echo '</h1>';
+    echo '<div class="clearfix"></div>';
     echo '<hr class="up">';
     echo '<hr class="down">';
     echo '<div id="regionguide_container">';
     echo '<div class="boxer radius">';
 
-    $categories = getDefaultDestinationCategories();
+    // $categories = getDefaultDestinationCategories();
+    $categories = $destination_category_names;
 
     foreach ($categories as $categorie_number => $categorie_name)
     {
@@ -120,7 +126,7 @@ else
         {
             $query = $db->prepare("
                 SELECT categorie_name
-                FROM ".$tbname." 
+                FROM ".TB_DESTINATIONS." 
             ");
         }
 
@@ -128,7 +134,7 @@ else
         {
             $query = $db->prepare("
                 SELECT categorie_name 
-                FROM ".$tbname." 
+                FROM ".TB_DESTINATIONS." 
                 WHERE categorie_name 
                 LIKE '%{$categorie_name}%'
             ");
@@ -149,12 +155,12 @@ else
         echo '<div class="regionspics shadows radius">';
         echo '<div class="boxer radius">';
         echo '<hr class="up"><hr class="down">';
-        echo '<a href="destinations.php?categorie='.$categorie_number.'" target="_self" style="text-decoration: none;">';
+        echo '<a href="destinations-inworld.php?categorie='.$categorie_number.'" target="_self" style="text-decoration: none;">';
         echo '<img class="" src="'.getImageByName("../img/", $categorie_name, 2).'" alt="'.$categorie_name.'" >';
         echo '<div class="regions">';
         echo '<hr class="up">';
         echo '<hr class="down">'.$categorie_name;
-        echo '<span>'.$counter.'</span>';
+        echo ' <span>'.$counter.'</span>';
         echo '<hr class="up">';
         echo '<hr class="down">';
         echo '<hr class="up">';
@@ -173,6 +179,34 @@ else
 }
 $query = null;
 ?>
+
+<?php if (!isset($_GET['categorie'])): ?>
+<!-- THE MODAL -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Modal Header</h2>
+        </div>
+        <div class="modal-body">
+            <p>Some text in the Modal Body</p>
+            <p>Some other text...</p>
+        </div>
+        <div class="modal-footer">
+            <h3>Modal Footer</h3>
+        </div>
+    </div>
+</div>
+
+<script>
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("myBtn");
+var span = document.getElementsByClassName("close")[0];
+btn.onclick = function() {modal.style.display = "block";}
+span.onclick = function() {modal.style.display = "none";}
+window.onclick = function(event) {if (event.target == modal) {modal.style.display = "none";}}
+</script>
+<?php endif; ?>
 
 </body>
 </html>

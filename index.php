@@ -1,22 +1,12 @@
+<?php if (session_status() == PHP_SESSION_NONE) {session_start();} ?>
+<?php include_once("inc/configcheck.php"); ?>
 <?php include_once("inc/config.php"); ?>
-<?php include_once("inc/functions.php"); ?>
-<?php include_once("inc/header.php"); ?>
-<?php include_once("inc/navbar.php"); ?>
-
-<!-- Fash Message -->
-<?php if(isset($_SESSION['flash'])): ?>
-    <?php foreach($_SESSION['flash'] as $type => $message): ?>
-        <div class="alert alert-<?php echo $type; ?> alert-anim">
-            <?php echo $message; ?>
-        </div>
-    <?php endforeach; ?>
-    <?php unset($_SESSION['flash']); ?>
-<?php endif; ?>
-
 <?php
+
 if ($useSQLite === TRUE)
 {
     include_once("inc/PDO-sqlite.php");
+    $tbname = "osguide_destinations";
 
     $db->query("
         CREATE TABLE IF NOT EXISTS ".$tbname." ( 
@@ -39,24 +29,35 @@ else
 {
     include_once("inc/PDO-mysql.php");
 }
-
-if (isset($_GET['home'])) $page = 1;
-else if (isset($_GET['categorie'])) $page = 2;
-else if (isset($_GET['search'])) $page = 3;
-else if (isset($_GET['help'])) $page = 4;
-else if (isset($_GET['details'])) $page = 5;
-else if (isset($_GET['refresh'])) $page = 6;
-else {$page = 1;} 
-
-echo '<div class="content">';
-if ($page == 1) require("inc/categories.php");
-else if ($page == 2) require("inc/regionswall.php");
-else if ($page == 3) require("inc/search.php");
-else if ($page == 4) require("inc/help.php");
-else if ($page == 5) require("inc/regiondetails.php");
-else if ($page == 6) require("inc/refresh.php");
-else require("inc/404.php");
-echo '</div>';
 ?>
+<?php // include_once("inc/PDO-mysql.php"); ?>
+<?php include_once("inc/functions.php"); ?>
 
-<?php include_once("inc/footer.php"); ?>
+<?php
+if (isset($_GET['page'])) {$page = $_GET['page'];}
+else {$page = 'home';}
+
+if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') && $useGzip === TRUE) {ob_start("ob_gzhandler");} 
+else ob_start();
+
+if ($page === 'home') {require 'inc/home.php';}
+else if ($page === 'destinations') {require 'inc/destinations.php';}
+else if ($page === 'destinations-wall') {require 'inc/destinations-wall.php';}
+else if ($page === 'destinations-list') {require 'inc/destinations-list.php';}
+else if ($page === 'destinations-details') {require 'inc/destinations-details.php';}
+// else if ($page === 'destinations-inworld') {require 'inc/destinations-inworld.php';}
+// else if ($page === 'refresh') {require 'inc/refresh.php';}
+else if ($page === 'reorder') {require 'inc/reorder.php';}
+else if ($page === 'help') {require 'inc/help.php';}
+else if ($page === 'search') {require 'inc/search.php';}
+else if ($page === 'login') {require 'inc/login.php';}
+else if ($page === 'logout') {require 'inc/logout.php';}
+else if ($page === 'admin') {require 'inc/admin.php';}
+else if ($page === '404') {require 'inc/404.php';}
+else require("inc/404.php");
+$content = ob_get_clean();
+require 'inc/template.php';
+// if ($page === 'destinations-inworld') echo $content;
+// else require 'inc/template.php';
+exit();
+?>

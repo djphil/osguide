@@ -42,6 +42,7 @@ if (isset($_POST['terminal']))
             return;
         }
 
+        // $categorie_number = htmlspecialchars($_POST["categorie_number"]);
         $categorie_name = htmlspecialchars($_POST["categorie_name"]);
 
         if (strtolower($categorie_name) == "official location")
@@ -60,6 +61,7 @@ if (isset($_POST['terminal']))
         $region_name = $buffer[0];
         $region_coord = "(".$buffer[1];
 
+        // $agents_online = [];
         $agents_list = base64_decode(htmlspecialchars($_POST["agents_list"]));
         $agents_online = explode(',', $agents_list);
 
@@ -84,7 +86,6 @@ if (isset($_POST['terminal']))
         $appURL = "secondlife:///app/teleport/".$region_name."/".$local_position;
         $lslURL = "secondlife://".$region_name."/".$local_position;
         $hopURL = "hop://".$region_name."/".$local_position;
-
         $timestamp  = time();
 
         if ($debug)
@@ -103,9 +104,11 @@ if (isset($_POST['terminal']))
             echo "\n[OBJECT UUID] ".$object_uuid;
             echo "\n[OBJECT NAME] ".$object_name;
             echo "\n[CATEGORIE NAME] ".$categorie_name;
+            // echo "\n[CATEGORIE NUMBER] ".$categorie_number;
             echo "\n[AGENTS ONLINE] ".$agents_online;
             echo "\n[AGENTS LIST] ".$agents_list;
             echo "\n[REGION NAME] ".$region_name;
+            // echo "\n[REGION UUID] ".$region_uuid;
             echo "\n[OWNER NAME] ".$owner_name;
             echo "\n[OWNER UUID] ".$owner_uuid;
             echo "\n[TIMESTAMP] ".$timestamp;
@@ -113,7 +116,7 @@ if (isset($_POST['terminal']))
 
         $query = $db->prepare("
             SELECT * 
-            FROM $tbname 
+            FROM ".TB_DESTINATIONS." 
             WHERE (
                 region_name = ?
                 AND 
@@ -145,7 +148,7 @@ if (isset($_POST['terminal']))
             echo "\n[TERMINAL INFOS] ".$counter." terminal ✘";
 
             $query = $db->prepare("
-                INSERT INTO $tbname (
+                INSERT INTO ".TB_DESTINATIONS." (
                     region_name, 
                     owner_name, 
                     owner_uuid, 
@@ -196,7 +199,7 @@ if (isset($_POST['terminal']))
 
             // UPDATE
             $query = $db->prepare("
-                UPDATE $tbname
+                UPDATE ".TB_DESTINATIONS." 
                 SET local_position = :local_position, 
                     http_server_url = :http_server_url, 
                     categorie_name = :categorie_name, 
@@ -225,7 +228,7 @@ if (isset($_POST['terminal']))
             // READ
             $query = $db->prepare("
                 SELECT * 
-                FROM $tbname 
+                FROM ".TB_DESTINATIONS." 
                 WHERE (
                     region_name = ?
                     AND 
@@ -257,8 +260,6 @@ if (isset($_POST['terminal']))
         }
     }
 }
-
 else exit("No direct access ...");
-
 $query = null;
 ?>

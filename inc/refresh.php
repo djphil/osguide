@@ -89,6 +89,5 @@ if (isset($_GET['refresh']))
     $sql = null;
     $db = null;
 }
-
-else echo '<script>document.location.href="./"</script>';
+else header('Location: ./');
 ?>
