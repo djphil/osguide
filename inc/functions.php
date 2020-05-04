@@ -5,6 +5,12 @@ function debug($variable)
     echo '<pre>'.print_r($variable, true).'</pre>';
 }
 
+function trucate($str, $max)
+{
+    if (strlen($str) < $max) return $str;
+    return substr($str, 0, $max)." ...";
+}
+
 function generate_uuid()
 {
     return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',

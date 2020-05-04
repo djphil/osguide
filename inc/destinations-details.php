@@ -141,7 +141,7 @@ if (isset($_GET['details']))
             $region_name = $row->region_name;
             $owner_name = $row->owner_name ;
             $owner_uuid = $row->owner_uuid;
-            $object_name = $row->object_name;
+            $object_name = trucate($row->object_name, 40);
             // $object_uuid = $row->object_uuid;
             $categorie_name = $row->categorie_name;
             $http_server_url = $row->http_server_url;
