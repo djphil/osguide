@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="css/osguide.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="css/slate.css">
     <!--[if lt IE 9]><link rel="stylesheet" href="css/gh-fork-ribbon.ie.min.css" /><![endif]-->
     <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="js/ie-emulation-modes-warning.js"></script>
