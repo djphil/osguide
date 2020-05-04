@@ -78,6 +78,7 @@ $useTheme = TRUE;
 // navbar-fixed-top
 // navbar-fixed-bottom
 $CLASS_NAVBAR = "navbar navbar-default";
+$CLASS_FOOTER_NAVBAR = "navbar navbar-default";
 $CLASS_ORDERBY_NAVBAR = "navbar navbar-default";
 
 /* Nav Style */

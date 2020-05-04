@@ -27,8 +27,8 @@
     <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="js/ie-emulation-modes-warning.js"></script>
     <!--[if lt IE 9]>
-      <script src="js/html5shiv.min.js"></script>
-      <script src="js/respond.min.js"></script>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
     <![endif]-->
 </head>
 
@@ -66,7 +66,7 @@
         <span class="glyphicon glyphicon-chevron-up"></span>
     </a>
 
-    <footer class="footer <?php echo $CLASS_NAVBAR; ?>">
+    <footer class="footer <?php echo $CLASS_FOOTER_NAVBAR; ?>">
         <div class="container-fluid">
             <div class="text-muted">
                 <div class="pull-right">
