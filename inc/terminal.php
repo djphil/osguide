@@ -15,9 +15,8 @@ if (isset($_POST['terminal']))
         {
             if(substr($key, 0, 5) == 'HTTP_')
             {
-                if ($limit_hosts === TRUE)
-                    if ($key === "HTTP_HOST")
-                        $http_host = $value;
+                if ($key === "HTTP_HOST")
+                    $http_host = $value;
                 if ($key === "HTTP_X_SECONDLIFE_REGION")
                     $region_name = $value;
                 if ($key === "HTTP_X_SECONDLIFE_OWNER_NAME")
