@@ -107,7 +107,7 @@ else
     echo '<h1>';
     echo '<a href="destinations-inworld.php">'.$title.' :</a> Categories';
     echo '<div class="pull-right">';
-    echo '<a href="secondlife://Digital Concepts/128/128/25" target="_self" style="text-decoration: none;">Teleport to OpenSim</a>';
+    echo '<a href="'.$default_url.'" target="_self" style="text-decoration: none;">Teleport to OpenSim</a>';
     echo '<span id="myBtn" class="badge"><a href=#" target="_self">?</a></span>';
     echo '</div>';
     echo '</h1>';

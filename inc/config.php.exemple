@@ -39,6 +39,7 @@ $useGzip = TRUE;
 $display_ribbon = TRUE;
 $github_url = "https://github.com/djphil/osguide";
 $script_url = "lsl/OpenSim Destination Guide Terminal v0.3.lsl";
+$default_url = "secondlife://Default Region/128/128/25";
 
 $wall_columns = 3; // 3 or 4
 $cats_columns = 3; // 3 or 4
