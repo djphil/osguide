@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 header('Content-Type: text/html; charset=utf-8');
 ini_set('magic_quotes_gpc', 0);
 ini_set('display_errors', 1);
